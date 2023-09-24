@@ -1,0 +1,33 @@
+
+<div class="container">
+    <h1>Payment Receipt</h1>
+    <div class="receipt-details">
+
+        <div class="receipt-row">
+            <div class="label">Customer Id:</div>
+            <div class="value" *ngFor="let transaction of transaction">{{ transaction.customerId }}</div>
+          </div>
+      <div class="receipt-row">
+        <div class="label">Customer Name:</div>
+        <div class="value" *ngFor="let transaction of transaction">{{ transaction.customerName }}</div>
+      </div>
+  
+      
+      <div class="receipt-row">
+        <div class="label">Amount:</div>
+        <div class="value"  *ngFor="let transaction of transaction">{{ transaction.amount}}</div>
+      </div>
+
+      <div class="receipt-row">
+        <div class="label">Status:</div>
+        <div class="value"  *ngFor="let transaction of transaction">{{ transaction.billStatus}}</div>
+      </div>
+  
+      
+  
+      <div class="receipt-row">
+        <div class="label">Transaction Date:</div>
+        <div class="value"  *ngFor="let transaction of transaction">{{ transaction.billDueDate }}</div>
+      </div>
+    </div>
+  </div>

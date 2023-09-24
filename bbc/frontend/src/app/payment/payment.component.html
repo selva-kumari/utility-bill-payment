@@ -1,0 +1,81 @@
+
+<div class="container">
+  <h1>Payment</h1>
+  <form (ngSubmit)="submitPaymentForm()" #paymentForm="ngForm">
+    <div class="form-group">
+      <label for="paymentMethod">Payment Method</label>
+      <select
+        id="paymentMethod"
+        name="paymentMethod"
+        class="form-control"
+        [(ngModel)]="payment.selectedPaymentMethod"
+        required
+      >
+        <option value="">Select Payment Method</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Debit Card">Debit Card</option>
+        <option value="Wallet">Wallet</option>
+        
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <label for="accountNumber">Card Number</label>
+      <input
+        type="text"
+        id="accountNumber"
+        name="accountNumber"
+        class="form-control"
+        [(ngModel)]="payment.accountNumber"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="cvv">CVV</label>
+      <input
+        type="text"
+        id="cvv"
+        name="cvv"
+        class="form-control"
+        [(ngModel)]="payment.cvv"
+        required
+      />
+    </div>
+    
+
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" (click)="generateOTP()">Generate OTP</button>
+    </div>
+
+    <div class="form-group">
+      <label for="otp">OTP</label>
+      <input
+        type="text"
+        id="otp"
+        name="otp"
+        class="form-control"
+        [(ngModel)]="otp"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="confirmOtp">Confirm OTP</label>
+      <input
+        type="text"
+        id="confirmOtp"
+        name="confirmOtp"
+        class="form-control"
+        [(ngModel)]="confirmOtp"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-success" [disabled]="!paymentForm.form.valid">Submit Payment</button>
+    </div>
+   
+  </form>
+</div>

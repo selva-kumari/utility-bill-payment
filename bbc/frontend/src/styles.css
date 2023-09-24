@@ -1,0 +1,4 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+.background{
+    background-image:url("../../utility-bill-pay/src/assets/loginimg.jpg");
+}
