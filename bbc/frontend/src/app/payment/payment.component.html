@@ -1,35 +1,39 @@
-
 <div class="container">
   <h1>Payment</h1>
-  <form (ngSubmit)="submitPaymentForm()" #paymentForm="ngForm">
+  <form (ngSubmit)="submitPaymentForm()" [formGroup]="paymentForm">
     <div class="form-group">
       <label for="paymentMethod">Payment Method</label>
       <select
         id="paymentMethod"
         name="paymentMethod"
         class="form-control"
-        [(ngModel)]="payment.selectedPaymentMethod"
-        required
+        formControlName="paymentMethod"
       >
         <option value="">Select Payment Method</option>
         <option value="Credit Card">Credit Card</option>
         <option value="Debit Card">Debit Card</option>
         <option value="Wallet">Wallet</option>
-        
       </select>
+      <div *ngIf="paymentForm.get('paymentMethod').hasError('required') && paymentForm.get('paymentMethod').touched" class="text-danger">
+        Payment Method is required.
+      </div>
     </div>
 
-
     <div class="form-group">
-      <label for="accountNumber">Card Number</label>
+      <label for="cardNumber">Card Number</label>
       <input
         type="text"
-        id="accountNumber"
-        name="accountNumber"
+        id="cardNumber"
+        name="cardNumber"
         class="form-control"
-        [(ngModel)]="payment.accountNumber"
-        required
+        formControlName="cardNumber"
       />
+      <div *ngIf="paymentForm.get('cardNumber').hasError('required') && paymentForm.get('cardNumber').touched" class="text-danger">
+        Card Number is required.
+      </div>
+      <div *ngIf="paymentForm.get('cardNumber').hasError('pattern') && paymentForm.get('cardNumber').touched" class="text-danger">
+        Please enter a valid 10-digit card number.
+      </div>
     </div>
 
     <div class="form-group">
@@ -39,11 +43,15 @@
         id="cvv"
         name="cvv"
         class="form-control"
-        [(ngModel)]="payment.cvv"
-        required
+        formControlName="cvv"
       />
+      <div *ngIf="paymentForm.get('cvv').hasError('required') && paymentForm.get('cvv').touched" class="text-danger">
+        CVV is required.
+      </div>
+      <div *ngIf="paymentForm.get('cvv').hasError('pattern') && paymentForm.get('cvv').touched" class="text-danger">
+        Please enter a valid 3 or 4-digit CVV.
+      </div>
     </div>
-    
 
     <div class="form-group">
       <button type="button" class="btn btn-primary" (click)="generateOTP()">Generate OTP</button>
@@ -56,9 +64,11 @@
         id="otp"
         name="otp"
         class="form-control"
-        [(ngModel)]="otp"
-        required
+        formControlName="otp"
       />
+      <div *ngIf="paymentForm.get('otp').hasError('required') && paymentForm.get('otp').touched" class="text-danger">
+        OTP is required.
+      </div>
     </div>
 
     <div class="form-group">
@@ -68,14 +78,15 @@
         id="confirmOtp"
         name="confirmOtp"
         class="form-control"
-        [(ngModel)]="confirmOtp"
-        required
+        formControlName="confirmOtp"
       />
+      <div *ngIf="paymentForm.get('confirmOtp').hasError('required') && paymentForm.get('confirmOtp').touched" class="text-danger">
+        Confirm OTP is required.
+      </div>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-success" [disabled]="!paymentForm.form.valid">Submit Payment</button>
+      <button type="submit" class="btn btn-success" [disabled]="!paymentForm.valid">Submit Payment</button>
     </div>
-   
   </form>
 </div>
