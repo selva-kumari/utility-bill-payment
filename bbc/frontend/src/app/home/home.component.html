@@ -15,9 +15,6 @@
   </thead>
   <tbody>
     <tr *ngFor="let bill of bills">
-      <td>
-        <input type="radio" name="selectedBill" [(ngModel)]="selectedBill" [value]="bill">
-      </td>
       <td>{{bill.billNumber }}</td>
       <td>{{bill.customerId}}</td>
       <td>{{bill.customerName}}</td>
