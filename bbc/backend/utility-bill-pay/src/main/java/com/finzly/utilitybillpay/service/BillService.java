@@ -19,15 +19,25 @@ public class BillService {
 	}
 
 	
-	public List<Bill> getBillsByCustomerId(int customerId) {
-        return billdao.getBillsByCustomerId(customerId);
+	public String getBillsByCustomerId(int customerId) {
+        try {
+            List<Bill> bills = billdao.getBillsByCustomerId(customerId);
+            return "Success"; 
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            return "Customer id is not found";
+        }
     }
 
-
-	public List<Bill> getBillsByNumber(int billNumber) {
-		return billdao.getBillsByNumber(billNumber);
-	}
-
+    public String getBillsByNumber(int billNumber) {
+        try {
+            List<Bill> bills = billdao.getBillsByNumber(billNumber);
+            return "Success"; 
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            return "The Bill number is not matched";
+        }
+    }
 
 	public String updateBillStatus(int billNumber) {
 		List<Bill> bills = billdao.getBillsByNumber(billNumber);
