@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -9,25 +11,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
+ paymentForm: FormGroup;
 
-  constructor(private service: HttpService
-    ,private router: Router) { }
+  constructor(private formBuilder: FormBuilder,private service: HttpService
+    ,private router: Router) {
+    this.paymentForm = this.formBuilder.group({
+      paymentMethod: ['', Validators.required],
+      cardNumber: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
+      cvv: ['', [Validators.required, Validators.pattern('[0-9]{3,4}')]],
+      otp: ['', Validators.required],
+      confirmOtp: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
   }
  
-  payment = {
-    selectedPaymentMethod: '',
-    accountNumber: '',
-    cvv: ''
-  };
   paymentMethods: string[] = ['Credit Card', 'Debit Card', 'Wallet'];
-
-  otp = '';
-  confirmOtp: string = '';
-  cvv='';
-
   submitPaymentForm() {
+    console.log(this.paymentForm.value);
     if (this.otp === this.confirmOtp) {
       alert('Payment successful!'); 
       this.ChangeBillStatus();
