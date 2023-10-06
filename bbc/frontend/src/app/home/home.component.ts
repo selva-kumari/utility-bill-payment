@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.GetBillDetails();
   }
-  selectedBill: any;
+ 
 
   onPayClick(bill:any) {
     if (bill.billStatus === 'unPaid') {
